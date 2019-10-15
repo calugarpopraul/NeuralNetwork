@@ -11,6 +11,7 @@ class NeuralNetwork:
         self.inputsSb = []
         self.weightsSp = []
         self.neuronsLabel = []
+        self.neuronValue = StringVar()
 
         self.f = Frame(master, width=700, height=700)
         self.f.pack()
@@ -33,8 +34,8 @@ class NeuralNetwork:
         for idx, element in enumerate(self.weights):
             self.neurons[idx] += (self.inputs[idx] * self.weights[idx])
         for idx, element in enumerate(self.neuronsLabel):
-            element.text(self.neurons[idx])
-
+            element["text"] = str(self.neurons[idx])
+            
     def updateSpinBoxes(self):
         for idx, element in enumerate(self.inputsSb):
             self.inputs[idx] = float(element.get())
@@ -79,7 +80,7 @@ class NeuralNetwork:
                 width=10,
             )
             labelWb = Label(
-                text = "{}".format(self.neurons[i])
+                text = "{}".format(self.neurons[i]),
             )
 
             curSb.place(x=xSi, y=ySi)
@@ -100,9 +101,9 @@ class NeuralNetwork:
             command=self.sum
             )            
         self.createCalculateInputsButton.grid(row=2, column=2)
-        
+
 
 root = Tk()
-root.geometry('500x500')
+root.geometry('800x800')
 nn = NeuralNetwork(root)
 root.mainloop()
